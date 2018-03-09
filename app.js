@@ -28,4 +28,8 @@ app.post('/mine', (req, res) => {
 
 app.post('/chain', (req, res) => res.send(thomasCoin.chain));
 
+app.post('/node/register', (req, res) => {
+    
+});
+
 app.listen(3000, console.log("Peer is listening on port 3000"));

@@ -35,6 +35,7 @@ class Blockchain {
         this.difficulty = 2;
         this.pendingTransactions = [];
         this.miningReward = 100;
+        this.nodes = [];
     }
 
     createGenesisBlock(){
