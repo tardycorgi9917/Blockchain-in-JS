@@ -54,6 +54,8 @@ class Blockchain {
         this.pendingTransactions = [
             new Transaction(null, miningRewardAdress, this.miningReward)
         ];
+
+        return block;
     }
 
     createTransaction(fromAdress, toAdress, amount){

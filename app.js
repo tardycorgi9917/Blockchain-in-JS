@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 
 app.get('/', (req, res) => res.send("Peer is Running"));
 
-app.post('/create-transaction', (req, res) => {
+app.post('/transaction/new', (req, res) => {
     const { toAdress, fromAdress, amount } = req.body;
 
     if(!toAdress || !fromAdress || !amount)
@@ -20,4 +20,12 @@ app.post('/create-transaction', (req, res) => {
     res.send({ trans, pending: thomasCoin.pendingTransactions});
 });
 
-app.listen(3000, console.log("peer is listening on port 3000"));
+app.post('/mine', (req, res) => {
+    const block = thomasCoin.minePendingTransactions();
+
+    res.send(block);
+});
+
+app.post('/chain', (req, res) => res.send(thomasCoin.chain));
+
+app.listen(3000, console.log("Peer is listening on port 3000"));
