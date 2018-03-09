@@ -98,6 +98,10 @@ class Blockchain {
 
         return true;
     }
+
+    registerNode(node){
+        this.nodes.push(node);
+    }
 }
 
 let thomasCoin = new Blockchain();
