@@ -102,6 +102,20 @@ class Blockchain {
     registerNode(node){
         this.nodes.push(node);
     }
+
+    resolveConflicts(){
+        const neighbors = this.nodes;
+        const newChain = null;
+
+        const chains = Promise.all(this.nodes.map(getChain));
+        return false;
+    }
+}
+
+const getChain = (node) => {
+    axios.get(node + '/chain').then(res => {
+        console.log(res);
+    });
 }
 
 let thomasCoin = new Blockchain();

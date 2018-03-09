@@ -26,12 +26,22 @@ app.post('/mine', (req, res) => {
     res.send(block);
 });
 
-app.post('/chain', (req, res) => res.send(thomasCoin.chain));
+app.get('/chain', (req, res) => res.send(thomasCoin.chain));
 
-app.post('/node/register', (req, res) => {
-    const { node } = req.body;
-    thomasCoin.registerNode(node);
+app.post('/nodes/register', (req, res) => {
+    const { nodes } = req.body;
+    if(!nodes)
+        res.sendStatus(400);
+    for(const node of nodes)
+        thomasCoin.registerNode(node);
     req.sendStatus(204);
+});
+
+app.post('/nodes/resolve', (req, res) => {
+    const isReplaced = thomasCoin.resolveConflicts();
+
+    isReplaced ? res.send("Blockchain has been replaced"):
+                 res.send("Blockchain is authorative");
 });
 
 app.listen(3000, console.log("Peer is listening on port 3000"));
