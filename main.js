@@ -7,6 +7,7 @@ class Transaction {
         this.amount = amount;
     }
 }
+
 class Block {
     constructor(timestamp, transactions, previousHash = ""){
         this.timestamp = timestamp;
@@ -55,8 +56,10 @@ class Blockchain {
         ];
     }
 
-    createTransaction(transaction){
-        this.pendingTransactions.push(transaction);
+    createTransaction(fromAdress, toAdress, amount){
+        const trans = new Transaction(fromAdress, toAdress, amount);
+        this.pendingTransactions.push(trans);
+        return trans;
     }
 
     getBalanceOfAddress(address){
@@ -96,15 +99,4 @@ class Blockchain {
 
 let thomasCoin = new Blockchain();
 
-thomasCoin.createTransaction(new Transaction('address1', 'address2', 100));
-thomasCoin.createTransaction(new Transaction('address2', 'address1', 50));
-
-console.log('\nStarting the miner...');
-thomasCoin.minePendingTransactions('xaviers-address');
-
-console.log('\nBalance of xavier is', thomasCoin.getBalanceOfAddress('xaviers-address'));
-
-console.log('\nStarting the miner again...');
-thomasCoin.minePendingTransactions('xaviers-address');
-
-console.log('\nBalance of xavier is', thomasCoin.getBalanceOfAddress('xaviers-address'));
+module.exports = thomasCoin;
